@@ -10,3 +10,5 @@ declare interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+declare module "three"  // declare module "第三方库"
+declare module "three/examples/jsm/controls/OrbitControls"  // declare module "第三方库"

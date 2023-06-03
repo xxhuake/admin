@@ -21,10 +21,10 @@ interface ILayoutSettings {
 }
 
 const layoutSettings: ILayoutSettings = {
-  showSettings: true,
+  showSettings: false,
   showTagsView: true,
   fixedHeader: true,
-  showSidebarLogo: true,
+  showSidebarLogo: false,
   showNotify: true,
   showThemeSwitch: true,
   showScreenfull: true,

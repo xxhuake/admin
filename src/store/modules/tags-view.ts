@@ -24,6 +24,10 @@ export const useTagsViewStore = defineStore("tags-view", () => {
       return
     }
     visitedViews.value.push(Object.assign({}, view))
+    //删除上一个
+    if (visitedViews.value.length > 2) {
+      visitedViews.value.shift()
+    }
   }
   const addCachedView = (view: ITagView) => {
     if (typeof view.name !== "string") return

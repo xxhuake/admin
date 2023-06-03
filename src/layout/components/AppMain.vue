@@ -15,9 +15,7 @@ const key = computed(() => {
   <section class="app-main">
     <router-view v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
-        <keep-alive :include="tagsViewStore.cachedViews">
-          <component :is="Component" :key="key" />
-        </keep-alive>
+        <keep-alive :include="tagsViewStore.cachedViews"> <component :is="Component" :key="key" /> </keep-alive>
       </transition>
     </router-view>
   </section>

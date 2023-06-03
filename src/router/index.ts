@@ -43,6 +43,10 @@ export const constantRoutes: RouteRecordRaw[] = [
     path: "/",
     component: Layout,
     redirect: "/dashboard",
+    meta: {
+      title: "监控区域",
+      svgIcon: "jiankong"
+    },
     children: [
       {
         path: "dashboard",
@@ -50,38 +54,107 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "Dashboard",
         meta: {
           title: "首页",
-          svgIcon: "dashboard",
+          svgIcon: "xzl",
           affix: true
         }
-      }
-    ]
-  },
-  {
-    path: "/unocss",
-    component: Layout,
-    redirect: "/unocss/index",
-    children: [
+      },
       {
-        path: "index",
-        component: () => import("@/views/unocss/index.vue"),
-        name: "UnoCSS",
+        path: "three",
+        component: () => import("@/views/dashboard/admin/three.vue"),
+        name: "Three",
         meta: {
-          title: "unocss",
-          svgIcon: "unocss"
+          title: "three",
+          // hidden: true,
+          svgIcon: "dashboard"
         }
       }
     ]
   },
+  // {
+  //   path: "/unocss",
+  //   component: Layout,
+  //   redirect: "/unocss/index",
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () => import("@/views/unocss/index.vue"),
+  //       name: "UnoCSS",
+  //       meta: {
+  //         title: "unocss",
+  //         svgIcon: "unocss"
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/link",
     component: Layout,
+    meta: {
+      title: "点位查询",
+      svgIcon: "link"
+    },
+    redirect: "/link/index",
     children: [
       {
-        path: "https://juejin.cn/post/7089377403717287972",
-        component: () => {},
+        path: "index",
+        component: () => import("@/views/query/data_query/index.vue"),
         name: "Link",
         meta: {
-          title: "外链",
+          title: "单点查询",
+          svgIcon: "link"
+        }
+      },
+      {
+        path: "Query",
+        component: () => import("@/views/query/group_query/index.vue"),
+        name: "Query",
+        meta: {
+          title: "多点查询",
+          svgIcon: "link"
+        }
+      },
+      {
+        path: "Alarm",
+        component: () => import("@/views/query/alarm_query/index.vue"),
+        name: "alarm",
+        meta: {
+          title: "报警查询",
+          svgIcon: "link"
+        }
+      },
+      {
+        path: "Hardware",
+        component: () => import("@/views/query/hard/index.vue"),
+        name: "Hardware",
+        meta: {
+          title: "硬件报警",
+          svgIcon: "link"
+        }
+      },
+      {
+        path: "Audit",
+        component: () => import("@/views/query/audit/index.vue"),
+        name: "Audit",
+        meta: {
+          title: "审计追踪",
+          svgIcon: "link"
+        }
+      },
+      {
+        path: "Batch",
+        component: () => import("@/views/query/batch/index.vue"),
+        name: "Batch",
+        meta: {
+          title: "批次查询",
+          svgIcon: "link"
+        }
+      },
+      {
+        path: "Batch_setting",
+        component: () => import("@/views/query/batch/batch_setting.vue"),
+        name: "Batch_setting",
+        meta: {
+          title: "批次设定",
           svgIcon: "link"
         }
       }
@@ -116,89 +189,53 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       }
     ]
-  },
-  {
-    path: "/menu",
-    component: Layout,
-    redirect: "/menu/menu1",
-    name: "Menu",
-    meta: {
-      title: "多级菜单",
-      svgIcon: "menu"
-    },
-    children: [
-      {
-        path: "menu1",
-        component: () => import("@/views/menu/menu1/index.vue"),
-        redirect: "/menu/menu1/menu1-1",
-        name: "Menu1",
-        meta: {
-          title: "menu1"
-        },
-        children: [
-          {
-            path: "menu1-1",
-            component: () => import("@/views/menu/menu1/menu1-1/index.vue"),
-            name: "Menu1-1",
-            meta: {
-              title: "menu1-1"
-            }
-          },
-          {
-            path: "menu1-2",
-            component: () => import("@/views/menu/menu1/menu1-2/index.vue"),
-            redirect: "/menu/menu1/menu1-2/menu1-2-1",
-            name: "Menu1-2",
-            meta: {
-              title: "menu1-2"
-            },
-            children: [
-              {
-                path: "menu1-2-1",
-                component: () => import("@/views/menu/menu1/menu1-2/menu1-2-1/index.vue"),
-                name: "Menu1-2-1",
-                meta: {
-                  title: "menu1-2-1"
-                }
-              },
-              {
-                path: "menu1-2-2",
-                component: () => import("@/views/menu/menu1/menu1-2/menu1-2-2/index.vue"),
-                name: "Menu1-2-2",
-                meta: {
-                  title: "menu1-2-2"
-                }
-              }
-            ]
-          },
-          {
-            path: "menu1-3",
-            component: () => import("@/views/menu/menu1/menu1-3/index.vue"),
-            name: "Menu1-3",
-            meta: {
-              title: "menu1-3"
-            }
-          }
-        ]
-      },
-      {
-        path: "menu2",
-        component: () => import("@/views/menu/menu2/index.vue"),
-        name: "Menu2",
-        meta: {
-          title: "menu2"
-        }
-      }
-    ]
-  },
+  }
+  // {
+  //   path: "/hook-demo",
+  //   component: Layout,
+  //   redirect: "/hook-demo/use-fetch-select",
+  //   name: "HookDemo",
+  //   meta: {
+  //     title: "hook 示例",
+  //     elIcon: "Menu",
+  //     alwaysShow: true
+  //   },
+  //   children: [
+  //     {
+  //       path: "use-fetch-select",
+  //       component: () => import("@/views/hook-demo/use-fetch-select.vue"),
+  //       name: "UseFetchSelect",
+  //       meta: {
+  //         title: "useFetchSelect"
+  //       }
+  //     },
+  //     {
+  //       path: "use-fullscreen-loading",
+  //       component: () => import("@/views/hook-demo/use-fullscreen-loading.vue"),
+  //       name: "UseFullscreenLoading",
+  //       meta: {
+  //         title: "useFullscreenLoading"
+  //       }
+  //     }
+  //   ]
+  // }
+  //endregion
+]
+
+/**
+ * 动态路由
+ * 用来放置有权限 (Roles 属性) 的路由
+ * 必须带有 Name 属性
+ */
+export const asyncRoutes: RouteRecordRaw[] = [
   {
     path: "/hook-demo",
     component: Layout,
     redirect: "/hook-demo/use-fetch-select",
     name: "HookDemo",
     meta: {
-      title: "hook 示例",
-      elIcon: "Menu",
+      title: "系统管理",
+      elIcon: "Setting",
       alwaysShow: true
     },
     children: [
@@ -219,15 +256,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       }
     ]
-  }
-]
-
-/**
- * 动态路由
- * 用来放置有权限 (Roles 属性) 的路由
- * 必须带有 Name 属性
- */
-export const asyncRoutes: RouteRecordRaw[] = [
+  },
   {
     path: "/permission",
     component: Layout,

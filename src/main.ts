@@ -16,8 +16,11 @@ import "element-plus/theme-chalk/dark/css-vars.css"
 import "vxe-table/lib/style.css"
 import "vxe-table-plugin-element/dist/style.css"
 import "@/styles/index.scss"
-
+//echarts 挂载
+import * as echarts from "echarts"
 const app = createApp(App)
+
+app.config.globalProperties.$echarts = echarts
 
 /** 加载插件 */
 loadPlugins(app)

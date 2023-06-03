@@ -32,4 +32,7 @@
   --v3-tagsview-tag-icon-hover-color: #ffffff;
   /** RightPanel 组件  */
   --v3-rightpanel-button-bg-color: #001428;
+  /**  查询头部h5 颜色 */
+  --mgms-search-header-text-color: #488bcf;
+  --mgms-search-before-bgcolor: #2bb2d0;
 }

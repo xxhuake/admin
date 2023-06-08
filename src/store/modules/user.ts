@@ -26,13 +26,12 @@ export const useUserStore = defineStore("user", () => {
   const login = (loginData: ILoginRequestData) => {
     return new Promise((resolve, reject) => {
       loginApi({
-        username: loginData.username,
-        password: loginData.password,
-        code: loginData.code
+        loginUsername: loginData.loginUsername,
+        loginPassword: loginData.loginPassword
       })
-        .then((res) => {
-          setToken(res.data.token)
-          token.value = res.data.token
+        .then((res: any) => {
+          setToken(res.username)
+          token.value = res.username
           resolve(true)
         })
         .catch((error) => {
@@ -44,7 +43,9 @@ export const useUserStore = defineStore("user", () => {
   const getInfo = () => {
     return new Promise((resolve, reject) => {
       getUserInfoApi()
-        .then((res) => {
+        .then((res: any) => {
+          console.log(res)
+
           const data = res.data
           username.value = data.username
           // 验证返回的 roles 是否是一个非空数组
@@ -57,6 +58,8 @@ export const useUserStore = defineStore("user", () => {
           resolve(res)
         })
         .catch((error) => {
+          console.log("失败")
+
           reject(error)
         })
     })

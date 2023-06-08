@@ -22,13 +22,13 @@ router.beforeEach(async (to, _from, next) => {
       NProgress.done()
     } else {
       // 检查用户是否已获得其权限角色
-      if (userStore.roles.length === 0) {
+      if (userStore.username === "") {
         try {
           if (asyncRouteSettings.open) {
             // 注意：角色必须是一个数组！ 例如: ['admin'] 或 ['developer', 'editor']
-            await userStore.getInfo()
-            const roles = userStore.roles
-            console.log("roles: ", roles)
+            // await userStore.getInfo()
+            userStore.username = "admin"
+            const roles = ["admin"]
             // 根据角色生成可访问的 Routes（可访问路由 = 常驻路由 + 有访问权限的动态路由）
             permissionStore.setRoutes(roles)
           } else {

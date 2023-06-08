@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { reactive } from "vue"
+import { reactive, ref } from "vue"
+import AddQuery from "@/public/Alert/Add-query.vue"
 interface IGetTableData {
   date: string
   name: string
@@ -28,13 +29,17 @@ const handleCurrentChange = (e: number) => {
 const handleSizeChange = (e: number) => {
   state.limit = e
 }
+const switchs = ref()
+const add = () => {
+  switchs.value.dialogVisible = true
+}
 </script>
 
 <template>
   <div class="data_query">
     <div class="d_top">
       <h5 class="before">批次管理</h5>
-      <svg-icon name="add" class="f-right" />
+      <svg-icon name="add" class="f-right" @click="add" />
       <div id="table">
         <el-table :data="tableData()" height="250" style="width: 100%">
           <el-table-column prop="date" label="Date" width="180" />
@@ -52,6 +57,8 @@ const handleSizeChange = (e: number) => {
         </div>
       </div>
     </div>
+    <!-- 添加弹窗 是否渲染组件-->
+    <AddQuery ref="switchs" />
   </div>
 </template>
 <style lang="scss">

@@ -31,15 +31,16 @@
           <el-button type="success">颜色管理</el-button>
         </div>
       </div>
-      <div id="chart" ref="chart" style="width: 100%; height: 420px" />
+      <div id="chart" ref="dom" style="width: 100%; height: 420px" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts"
-import { ref, onMounted } from "vue"
-const chart = ref<echarts.ECharts>()
+import { ref, onMounted, shallowRef } from "vue"
+const dom = ref<echarts.ECharts>()
+const chart = shallowRef()
 const option = ref()
 option.value = {
   title: {
@@ -127,6 +128,9 @@ option.value = {
 onMounted(() => {
   chart.value = echarts.init(document.getElementById("chart") as HTMLDivElement)
   chart.value.setOption(option.value)
+})
+window.addEventListener("resize", function () {
+  chart.value.resize()
 })
 </script>
 

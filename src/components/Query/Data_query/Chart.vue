@@ -31,102 +31,115 @@
           <el-button type="success">颜色管理</el-button>
         </div>
       </div>
-      <div id="chart" ref="chart" style="width: 100%; height: 420px" />
+      <div id="chart" ref="dom" style="width: 100%; height: 420px" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts"
-import { ref, onMounted } from "vue"
-const chart = ref<echarts.ECharts>()
+import { ref, onMounted, shallowRef } from "vue"
+import dayjs from "dayjs"
+const dom = ref<echarts.ECharts>()
+const chart = shallowRef()
 const option = ref()
+const $series = ref([])
 option.value = {
+  backgroundColor: "#fff",
   title: {
-    text: "Stacked Line"
+    text: "",
+    subtext: "",
+    x: "50%",
+    textStyle: {
+      color: "#000000",
+      fontSize: "20"
+    }
   },
+  legend: {
+    textStyle: {
+      align: "right"
+    },
+    top: "2%",
+    right: "2%"
+  },
+
   tooltip: {
     trigger: "axis"
   },
-  legend: {
-    data: [
-      "广州西门子变压器公司",
-      "耐恒（广州）纸品有限公司",
-      "广州斗原钢铁有限公司",
-      "广州璨宇光学有限公司",
-      "佐登妮丝（广州）有限公司"
-    ]
-  },
+
   grid: {
-    left: "3%",
-    right: "4%",
-    bottom: "3%",
-    containLabel: true
+    top: "18%",
+    left: "8%",
+    right: "3%",
+    bottom: "10%"
   },
-  toolbox: {
-    feature: {
-      saveAsImage: {}
+  dataZoom: {
+    type: "inside"
+  },
+  xAxis: [
+    {
+      type: "category",
+      boundaryGap: false,
+      splitNumber: 10,
+      max: "dataMax",
+      min: "dataMin",
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: "#000"
+        }
+      },
+      axisLabel: {
+        formatter: function (value: any) {
+          return dayjs(value).format("YYYY-MM-DD \n HH:mm:ss")
+        },
+        color: "#000"
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "rgba(83, 83, 83, .4)"
+        }
+      },
+      axisTick: {
+        show: false
+      }
     }
-  },
-  xAxis: {
-    type: "category",
-    boundaryGap: false,
-    data: [
-      "2021-12-20 00:00:00",
-      "2021-12-20 06:00:00",
-      "2021-12-20 12:00:00",
-      "2021-12-20 18:00:00",
-      "2021-12-21 00:00:00",
-      "2021-12-21 06:00:00",
-      "2021-12-21 12:00:00",
-      "2021-12-21 18:00:00",
-      "2021-12-22 00:00:00"
-    ]
-  },
-  yAxis: {
-    type: "value"
-  },
-  series: [
+  ],
+
+  yAxis: [
     {
-      name: "广州西门子变压器公司",
-      type: "line",
-      // stack: 'Total',
-      data: [130, 105, 135, 120, 175, 205, 185, 195, 208],
-      smooth: true
-    },
-    {
-      name: "耐恒（广州）纸品有限公司",
-      type: "line",
-      // stack: 'Total',
-      data: [225, 222, 180, 234, 205, 180, 170, 220, 231],
-      smooth: true
-    },
-    {
-      name: "广州斗原钢铁有限公司",
-      type: "line",
-      // stack: 'Total',
-      data: [180, 230, 201, 150, 230, 230, 240, 210, 240],
-      smooth: true
-    },
-    {
-      name: "广州璨宇光学有限公司",
-      type: "line",
-      // stack: 'Total',
-      data: [180, 175, 201, 210, 200, 142, 205, 235, 248],
-      smooth: true
-    },
-    {
-      name: "佐登妮丝（广州）有限公司",
-      type: "line",
-      // stack: 'Total',
-      data: [235, 250, 238, 252, 260, 245, 235, 235, 230],
-      smooth: true
+      type: "value",
+      min: 0,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#e3e3e3"
+        }
+      },
+      axisLine: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        margin: 20,
+        formatter: "{value}"
+      },
+      axisTick: {
+        show: false
+      }
     }
-  ]
+  ],
+  series: $series
 }
+
 onMounted(() => {
   chart.value = echarts.init(document.getElementById("chart") as HTMLDivElement)
-  chart.value.setOption(option.value)
+})
+defineExpose({
+  option,
+  chart,
+  $series
 })
 </script>
 
